@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    @Styles.Render("~/Content/materialize/css/materialize.css")
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href=@Url.RouteUrl("Home") class="brand-logo">Scrap-Metal</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>@Html.ActionLink("Metal", "Index", "Scrap")</li>
+                <li>@Html.ActionLink("Provider", "Index", "Provider")</li>
+                <li>@Html.ActionLink("Receiver", "Index", "Receiver")</li>
+                <li>@Html.ActionLink("Store", "Index", "Store")</li>
+                <li>@Html.ActionLink("Consumption", "Index", "Consumption")</li>
+                <li>@Html.ActionLink("Arraiving", "Index", "Arraiving")</li>
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    @Scripts.Render("~/Scripts/scripts.js")
+</body>
+</html>

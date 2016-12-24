@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Kursach.Store>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsible)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsible)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a class="custom">Delete</a>
+                <div id="modal_form_delete">
+                    <!-- Сaмo oкнo -->
+                    <span id="modal_close_delete">X</span> <!-- Кнoпкa зaкрыть -->
+                    @Html.Partial("Delete", item);
+                </div>
+                <div id="overlay_delete"></div><!-- Пoдлoжкa -->
+            </td>
+        </tr>
+    }
+</table>
+<div id="openPopup-create">
+    <a class="waves-effect waves-light btn-large add-metal">Додати провайдера</a>
+</div>
+
+<div id="modal_form">
+    <!-- Сaмo oкнo -->
+    <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть -->
+    @Html.Partial("Create", new Kursach.Store());
+</div>
+<div id="overlay"></div><!-- Пoдлoжкa --> 

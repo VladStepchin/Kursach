@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Kursach.Scrap>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <table class="striped bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Density)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store_Id)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Density)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store_Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id })                  
+                    <a class="custom">Delete</a>
+                    <div id="modal_form_delete">
+                        <!-- Сaмo oкнo -->
+                        <span id="modal_close_delete">X</span> <!-- Кнoпкa зaкрыть -->
+                        @Html.Partial("Delete", item);
+                    </div>
+                        <div id="overlay_delete"></div><!-- Пoдлoжкa -->
+                </td>
+            </tr>
+        }
+    </table>
+<div id="openPopup-create">
+    <a class="waves-effect waves-light btn-large add-metal">Додати метал</a>
+</div>
+<div class="additional-action">
+    <a href=@Url.RouteUrl("ConvertHtmlPageToPdf") class="waves-effect waves-light btn-large">Оформити звіт</a>
+</div>
+<div id="modal_form">
+    <!-- Сaмo oкнo -->
+    <span id="modal_close">X</span> <!-- Кнoпкa зaкрыть -->
+    @Html.Partial("Create", new Kursach.Scrap());
+</div>
+<div id="overlay"></div><!-- Пoдлoжкa -->

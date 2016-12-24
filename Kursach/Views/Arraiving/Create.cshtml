@@ -1,0 +1,71 @@
+﻿@model Kursach.Arraiving
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Create", "Arraiving"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Arraiving</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Provider_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Provider_Id)
+            @Html.ValidationMessageFor(model => model.Provider_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Scrap_MetalCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Scrap_MetalCode)
+            @Html.ValidationMessageFor(model => model.Scrap_MetalCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ArravingDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ArravingDate)
+            @Html.ValidationMessageFor(model => model.ArravingDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Cost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Cost)
+            @Html.ValidationMessageFor(model => model.Cost)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Store_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Store_Id)
+            @Html.ValidationMessageFor(model => model.Store_Id)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
