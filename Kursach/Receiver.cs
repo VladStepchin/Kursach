@@ -20,17 +20,11 @@ namespace Kursach
         }
     
         public int Id { get; set; }
-
         public string FirmTitle { get; set; }
-
         public string CompanyCode { get; set; }
-
         public string Address { get; set; }
-
         public string Telephone { get; set; }
-
         public string Account { get; set; }
-
         public string ContactPerson { get; set; }
     
         public virtual ICollection<Consumption> Consumptions { get; set; }

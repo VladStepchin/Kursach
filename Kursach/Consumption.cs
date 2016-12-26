@@ -15,23 +15,15 @@ namespace Kursach
     public partial class Consumption
     {
         public int Id { get; set; }
-
         public Nullable<int> Receiver_Id { get; set; }
-
         public Nullable<int> Scrap_MetalCode { get; set; }
-
         public Nullable<System.DateTime> ArravingDate { get; set; }
-
         public double Cost { get; set; }
-
         public double Amount { get; set; }
-
         public int Store_Id { get; set; }
     
         public virtual Receiver Receiver { get; set; }
-
         public virtual Scrap Scrap { get; set; }
-
         public virtual Store Store { get; set; }
     }
 }

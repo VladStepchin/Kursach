@@ -15,7 +15,6 @@ namespace Kursach
     public partial class ColumnsCount
     {
         public Nullable<int> Count { get; set; }
-
         public string table_name { get; set; }
     }
 }

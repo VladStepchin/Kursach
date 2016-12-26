@@ -22,16 +22,11 @@ namespace Kursach
         }
     
         public int Id { get; set; }
-
         public string Title { get; set; }
-
         public string Responsible { get; set; }
-
     
         public virtual ICollection<Arraiving> Arraivings { get; set; }
-
         public virtual ICollection<Consumption> Consumptions { get; set; }
-
         public virtual ICollection<Scrap> Scraps { get; set; }
     }
 }

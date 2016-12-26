@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScrapMetal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Arraiving">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Provider_Id" Type="Int32" Nullable="false" />
+    <Property Name="Scrap_MetalCode" Type="Int32" Nullable="false" />
+    <Property Name="ArravingDate" Type="DateTime" Precision="3" />
+    <Property Name="Cost" Type="Double" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Store_Id" Type="Int32" />
+    <NavigationProperty Name="Provider" Relationship="Self.FK__Arraiving__Provi__3B75D760" FromRole="Arraiving" ToRole="Provider" />
+    <NavigationProperty Name="Scrap" Relationship="Self.FK__Arraiving__Scrap__3C69FB99" FromRole="Arraiving" ToRole="Scrap" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Arraiving__Store__3E52440B" FromRole="Arraiving" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Consumption">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Receiver_Id" Type="Int32" />
+    <Property Name="Scrap_MetalCode" Type="Int32" />
+    <Property Name="ArravingDate" Type="DateTime" Precision="3" />
+    <Property Name="Cost" Type="Double" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Store_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Receiver" Relationship="Self.FK__Consumpti__Recei__52593CB8" FromRole="Consumption" ToRole="Receiver" />
+    <NavigationProperty Name="Scrap" Relationship="Self.FK__Consumpti__Scrap__534D60F1" FromRole="Consumption" ToRole="Scrap" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Consumpti__Store__5535A963" FromRole="Consumption" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PassportCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Arraivings" Relationship="Self.FK__Arraiving__Provi__3B75D760" FromRole="Provider" ToRole="Arraiving" />
+  </EntityType>
+  <EntityType Name="Receiver">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirmTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CompanyCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactPerson" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Consumptions" Relationship="Self.FK__Consumpti__Recei__52593CB8" FromRole="Receiver" ToRole="Consumption" />
+  </EntityType>
+  <EntityType Name="Scrap">
+    <Key>
+      <PropertyRef Name="MetalCode" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MetalCode" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="Density" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Store_Id" Type="Int32" />
+    <NavigationProperty Name="Arraivings" Relationship="Self.FK__Arraiving__Scrap__3C69FB99" FromRole="Scrap" ToRole="Arraiving" />
+    <NavigationProperty Name="Consumptions" Relationship="Self.FK__Consumpti__Scrap__534D60F1" FromRole="Scrap" ToRole="Consumption" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Scrap__Store_Id__2D27B809" FromRole="Scrap" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Responsible" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Arraivings" Relationship="Self.FK__Arraiving__Store__3E52440B" FromRole="Store" ToRole="Arraiving" />
+    <NavigationProperty Name="Consumptions" Relationship="Self.FK__Consumpti__Store__5535A963" FromRole="Store" ToRole="Consumption" />
+    <NavigationProperty Name="Scraps" Relationship="Self.FK__Scrap__Store_Id__2D27B809" FromRole="Store" ToRole="Scrap" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ColumnsCount">
+    <Key>
+      <PropertyRef Name="table_name" />
+    </Key>
+    <Property Name="Count" Type="Int32" />
+    <Property Name="table_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetailsOfArraivedMetal">
+    <Key>
+      <PropertyRef Name="Density" />
+      <PropertyRef Name="Scrap_MetalCode" />
+      <PropertyRef Name="Cost" />
+    </Key>
+    <Property Name="Density" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Scrap_MetalCode" Type="Int32" Nullable="false" />
+    <Property Name="Cost" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProviderReceiverInterconnection">
+    <Key>
+      <PropertyRef Name="FirmTitle" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+    </Key>
+    <Property Name="FirmTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VIPProvider">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Amount" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PassportCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Arraiving__Provi__3B75D760">
+    <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+    <End Role="Arraiving" Type="Self.Arraiving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arraiving">
+        <PropertyRef Name="Provider_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Arraiving__Scrap__3C69FB99">
+    <End Role="Scrap" Type="Self.Scrap" Multiplicity="1" />
+    <End Role="Arraiving" Type="Self.Arraiving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scrap">
+        <PropertyRef Name="MetalCode" />
+      </Principal>
+      <Dependent Role="Arraiving">
+        <PropertyRef Name="Scrap_MetalCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Arraiving__Store__3E52440B">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Arraiving" Type="Self.Arraiving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arraiving">
+        <PropertyRef Name="Store_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consumpti__Recei__52593CB8">
+    <End Role="Receiver" Type="Self.Receiver" Multiplicity="0..1" />
+    <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receiver">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consumption">
+        <PropertyRef Name="Receiver_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consumpti__Scrap__534D60F1">
+    <End Role="Scrap" Type="Self.Scrap" Multiplicity="0..1" />
+    <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Scrap">
+        <PropertyRef Name="MetalCode" />
+      </Principal>
+      <Dependent Role="Consumption">
+        <PropertyRef Name="Scrap_MetalCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consumpti__Store__5535A963">
+    <End Role="Store" Type="Self.Store" Multiplicity="1" />
+    <End Role="Consumption" Type="Self.Consumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consumption">
+        <PropertyRef Name="Store_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Scrap__Store_Id__2D27B809">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Scrap" Type="Self.Scrap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Scrap">
+        <PropertyRef Name="Store_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Arraivings" EntityType="Self.Arraiving" />
+    <EntitySet Name="Consumptions" EntityType="Self.Consumption" />
+    <EntitySet Name="Providers" EntityType="Self.Provider" />
+    <EntitySet Name="Receivers" EntityType="Self.Receiver" />
+    <EntitySet Name="Scraps" EntityType="Self.Scrap" />
+    <EntitySet Name="Stores" EntityType="Self.Store" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="ColumnsCounts" EntityType="Self.ColumnsCount" />
+    <EntitySet Name="DetailsOfArraivedMetals" EntityType="Self.DetailsOfArraivedMetal" />
+    <EntitySet Name="ProviderReceiverInterconnections" EntityType="Self.ProviderReceiverInterconnection" />
+    <EntitySet Name="VIPProviders" EntityType="Self.VIPProvider" />
+    <AssociationSet Name="FK__Arraiving__Provi__3B75D760" Association="Self.FK__Arraiving__Provi__3B75D760">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="Arraiving" EntitySet="Arraivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Arraiving__Scrap__3C69FB99" Association="Self.FK__Arraiving__Scrap__3C69FB99">
+      <End Role="Scrap" EntitySet="Scraps" />
+      <End Role="Arraiving" EntitySet="Arraivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Arraiving__Store__3E52440B" Association="Self.FK__Arraiving__Store__3E52440B">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Arraiving" EntitySet="Arraivings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consumpti__Recei__52593CB8" Association="Self.FK__Consumpti__Recei__52593CB8">
+      <End Role="Receiver" EntitySet="Receivers" />
+      <End Role="Consumption" EntitySet="Consumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consumpti__Scrap__534D60F1" Association="Self.FK__Consumpti__Scrap__534D60F1">
+      <End Role="Scrap" EntitySet="Scraps" />
+      <End Role="Consumption" EntitySet="Consumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consumpti__Store__5535A963" Association="Self.FK__Consumpti__Store__5535A963">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Consumption" EntitySet="Consumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Scrap__Store_Id__2D27B809" Association="Self.FK__Scrap__Store_Id__2D27B809">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Scrap" EntitySet="Scraps" />
+    </AssociationSet>
+    <FunctionImport Name="countAllArraiving" ReturnType="Collection(Double)" />
+    <FunctionImport Name="countRows" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="coutRows" />
+    <FunctionImport Name="getArravingsIn2016" ReturnType="Collection(ScrapMetal.getArravingsIn2016_Result)" />
+    <FunctionImport Name="getBestProviders" ReturnType="Collection(ScrapMetal.getBestProviders_Result)" />
+    <FunctionImport Name="getVIP" ReturnType="Collection(String)" />
+    <FunctionImport Name="h1" ReturnType="Collection(ScrapMetal.h1_Result)">
+      <Parameter Name="LastName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="proc1" ReturnType="Collection(Int32)">
+      <Parameter Name="par1" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ScrapMetal.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ScrapMetal.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="TableCounts" />
+    <FunctionImport Name="TableFieldsCount" />
+  </EntityContainer>
+  <ComplexType Name="getArravingsIn2016_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="Provider_Id" Nullable="false" />
+    <Property Type="Int32" Name="Scrap_MetalCode" Nullable="false" />
+    <Property Type="DateTime" Name="ArravingDate" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="Cost" Nullable="false" />
+    <Property Type="Double" Name="Amount" Nullable="false" />
+    <Property Type="Int32" Name="Store_Id" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getBestProviders_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Surname" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="PassportCode" Nullable="true" MaxLength="10" />
+    <Property Type="Double" Name="Cost" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="h1_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirmTitle" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CompanyCode" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telephone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Account" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="ContactPerson" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

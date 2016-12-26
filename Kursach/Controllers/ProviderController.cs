@@ -10,8 +10,8 @@ namespace Kursach.Controllers
 {
     public class ProviderController : Controller, IDbHelper<Provider>
     {
-       
-        ScrapMetal db = new ScrapMetal();
+
+        MyDb db = new MyDb();
 
         public Provider getItemById(int? id)
         {

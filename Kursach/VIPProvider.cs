@@ -15,15 +15,10 @@ namespace Kursach
     public partial class VIPProvider
     {
         public string Name { get; set; }
-
         public string Surname { get; set; }
-
         public string PassportCode { get; set; }
-
         public string Address { get; set; }
-
         public string Telephone { get; set; }
-
         public double Amount { get; set; }
     }
 }

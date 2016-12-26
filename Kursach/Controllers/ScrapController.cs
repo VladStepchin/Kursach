@@ -13,7 +13,7 @@ namespace Kursach.Controllers
 {
     public class ScrapController : Controller, IDbHelper<Scrap>
     {
-        ScrapMetal db = new ScrapMetal();
+        MyDb db = new MyDb();
 
         public Scrap getItemById(int? id) 
         {

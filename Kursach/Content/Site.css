@@ -176,3 +176,6 @@ div.additional-action > a
 div#opepPopup-create {
     float: left;
 }
+.right-sign {
+    float:right;
+}

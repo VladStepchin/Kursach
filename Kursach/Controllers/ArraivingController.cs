@@ -10,7 +10,7 @@ namespace Kursach.Controllers
 {
     public class ArraivingController : Controller, IDbHelper<Arraiving>
     {
-        ScrapMetal db = new ScrapMetal();
+        MyDb db = new MyDb();
 
         public Arraiving getItemById(int? id)
         {

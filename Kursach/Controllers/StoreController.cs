@@ -10,7 +10,7 @@ namespace Kursach.Controllers
 {
     public class StoreController : Controller, IDbHelper<Store>
     {
-        ScrapMetal db = new ScrapMetal();
+        MyDb db = new MyDb();
 
         public Store getItemById(int? id)
         {

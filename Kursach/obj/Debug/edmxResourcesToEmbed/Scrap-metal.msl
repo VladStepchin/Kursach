@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ScrapMetalContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Arraivings">
+      <EntityTypeMapping TypeName="ScrapMetal.Arraiving">
+        <MappingFragment StoreEntitySet="Arraiving">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Provider_Id" ColumnName="Provider_Id" />
+          <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+          <ScalarProperty Name="ArravingDate" ColumnName="ArravingDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consumptions">
+      <EntityTypeMapping TypeName="ScrapMetal.Consumption">
+        <MappingFragment StoreEntitySet="Consumption">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Receiver_Id" ColumnName="Receiver_Id" />
+          <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+          <ScalarProperty Name="ArravingDate" ColumnName="ArravingDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Providers">
+      <EntityTypeMapping TypeName="ScrapMetal.Provider">
+        <MappingFragment StoreEntitySet="Provider">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="PassportCode" ColumnName="PassportCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receivers">
+      <EntityTypeMapping TypeName="ScrapMetal.Receiver">
+        <MappingFragment StoreEntitySet="Receiver">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scraps">
+      <EntityTypeMapping TypeName="ScrapMetal.Scrap">
+        <MappingFragment StoreEntitySet="Scrap">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MetalCode" ColumnName="MetalCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Density" ColumnName="Density" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="ScrapMetal.Store">
+        <MappingFragment StoreEntitySet="Store">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Responsible" ColumnName="Responsible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ScrapMetal.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ColumnsCounts">
+      <EntityTypeMapping TypeName="ScrapMetal.ColumnsCount">
+        <MappingFragment StoreEntitySet="ColumnsCount">
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="table_name" ColumnName="table_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailsOfArraivedMetals">
+      <EntityTypeMapping TypeName="ScrapMetal.DetailsOfArraivedMetal">
+        <MappingFragment StoreEntitySet="DetailsOfArraivedMetal">
+          <ScalarProperty Name="Density" ColumnName="Density" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProviderReceiverInterconnections">
+      <EntityTypeMapping TypeName="ScrapMetal.ProviderReceiverInterconnection">
+        <MappingFragment StoreEntitySet="ProviderReceiverInterconnection">
+          <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VIPProviders">
+      <EntityTypeMapping TypeName="ScrapMetal.VIPProvider">
+        <MappingFragment StoreEntitySet="VIPProviders">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="PassportCode" ColumnName="PassportCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="countAllArraiving" FunctionName="Хранилище ScrapMetal.countAllArraiving" />
+    <FunctionImportMapping FunctionImportName="countRows" FunctionName="Хранилище ScrapMetal.countRows" />
+    <FunctionImportMapping FunctionImportName="coutRows" FunctionName="Хранилище ScrapMetal.coutRows" />
+    <FunctionImportMapping FunctionImportName="getArravingsIn2016" FunctionName="Хранилище ScrapMetal.getArravingsIn2016">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ScrapMetal.getArravingsIn2016_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Provider_Id" ColumnName="Provider_Id" />
+          <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+          <ScalarProperty Name="ArravingDate" ColumnName="ArravingDate" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getBestProviders" FunctionName="Хранилище ScrapMetal.getBestProviders">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ScrapMetal.getBestProviders_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="PassportCode" ColumnName="PassportCode" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getVIP" FunctionName="Хранилище ScrapMetal.getVIP" />
+    <FunctionImportMapping FunctionImportName="h1" FunctionName="Хранилище ScrapMetal.h1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ScrapMetal.h1_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="proc1" FunctionName="Хранилище ScrapMetal.proc1" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище ScrapMetal.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище ScrapMetal.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище ScrapMetal.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище ScrapMetal.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ScrapMetal.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище ScrapMetal.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ScrapMetal.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище ScrapMetal.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище ScrapMetal.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="TableCounts" FunctionName="Хранилище ScrapMetal.TableCounts" />
+    <FunctionImportMapping FunctionImportName="TableFieldsCount" FunctionName="Хранилище ScrapMetal.TableFieldsCount" />
+  </EntityContainerMapping>
+</Mapping>

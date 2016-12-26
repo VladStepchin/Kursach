@@ -13,7 +13,7 @@ namespace Kursach.Helpers
 {
     public class PDFConventerHelper : Controller
     {
-        ScrapMetal db = new ScrapMetal();
+        MyDb db = new MyDb();
 
         public string RenderViewAsString(string viewName, object model)
         {

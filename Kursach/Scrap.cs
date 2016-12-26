@@ -11,7 +11,6 @@ namespace Kursach
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Scrap
     {
@@ -20,39 +19,17 @@ namespace Kursach
             this.Arraivings = new HashSet<Arraiving>();
             this.Consumptions = new HashSet<Consumption>();
         }
-
-        [ScaffoldColumn(false)]
+    
         public int Id { get; set; }
-
-        [Display(Name = "Название")]
-        [Required(ErrorMessage = "Поле должно быть установлено")]
-        [StringLength(25, ErrorMessage = "Длина строки должна быть от 50 символов")]
         public string Title { get; set; }
-
-        [Display(Name = "Код метала")]
-        [Required(ErrorMessage = "Поле должно быть установлено")]
         public int MetalCode { get; set; }
-
-        [Display(Name = "Количество")]
-        [Required(ErrorMessage = "Поле должно быть установлено")]
         public double Amount { get; set; }
-
-        [Display(Name = "Густина")]
-        [Required(ErrorMessage = "Поле должно быть установлено")]
         public int Density { get; set; }
-
-        [Display(Name = "Опис")]
-        [StringLength(50, ErrorMessage = "Длина строки должна быть до 50 символов")]
         public string Description { get; set; }
-
-        [Display(Name = "Номер складу")]
         public Nullable<int> Store_Id { get; set; }
-
     
         public virtual ICollection<Arraiving> Arraivings { get; set; }
-
         public virtual ICollection<Consumption> Consumptions { get; set; }
-
         public virtual Store Store { get; set; }
     }
 }

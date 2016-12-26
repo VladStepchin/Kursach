@@ -11,7 +11,7 @@ namespace Kursach.Controllers
     public class ConsumptionController : Controller, IDbHelper<Consumption>
     {
 
-        ScrapMetal db = new ScrapMetal();
+        MyDb db = new MyDb();
 
         public Consumption getItemById(int? id)
         {

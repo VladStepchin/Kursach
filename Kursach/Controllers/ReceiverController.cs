@@ -10,8 +10,8 @@ namespace Kursach.Controllers
 {
     public class ReceiverController : Controller, IDbHelper<Receiver>
     {
-       
-        ScrapMetal db = new ScrapMetal();
+
+        MyDb db = new MyDb();
 
         public Receiver getItemById(int? id)
         {

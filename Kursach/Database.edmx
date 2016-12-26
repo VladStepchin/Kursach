@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ScrapMetalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ScrapMetal" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Arraiving">
           <Key>
             <PropertyRef Name="Id" />
@@ -78,6 +78,25 @@
           <Property Name="Title" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Responsible" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RememberMe" Type="bit" />
+        </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Scrap-metal.dbo.ColumnsCount" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ColumnsCount">
@@ -86,6 +105,31 @@
           </Key>
           <Property Name="Count" Type="int" />
           <Property Name="table_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Scrap-metal.dbo.DetailsOfArraivedMetal" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="DetailsOfArraivedMetal">
+          <Key>
+            <PropertyRef Name="Density" />
+            <PropertyRef Name="Scrap_MetalCode" />
+            <PropertyRef Name="Cost" />
+          </Key>
+          <Property Name="Density" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Scrap_MetalCode" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Scrap-metal.dbo.ProviderReceiverInterconnection" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProviderReceiverInterconnection">
+          <Key>
+            <PropertyRef Name="FirmTitle" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="FirmTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Scrap-metal.dbo.VIPProviders" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -189,21 +233,77 @@
         <Function Name="countAllArraiving" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="countRows" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="coutRows" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="getArravingsIn2016" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getBestProviders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getVIP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="h1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="proc1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="TableCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="TableFieldsCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Хранилище ScrapMetalModelContainer">
+        <EntityContainer Name="Хранилище ScrapMetalContainer">
           <EntitySet Name="Arraiving" EntityType="Self.Arraiving" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consumption" EntityType="Self.Consumption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receiver" EntityType="Self.Receiver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Scrap" EntityType="Self.Scrap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ColumnsCount" EntityType="Self.ColumnsCount" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ColumnsCount].[Count] AS [Count], 
 [ColumnsCount].[table_name] AS [table_name]
 FROM [dbo].[ColumnsCount] AS [ColumnsCount]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DetailsOfArraivedMetal" EntityType="Self.DetailsOfArraivedMetal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DetailsOfArraivedMetal].[Density] AS [Density], 
+[DetailsOfArraivedMetal].[Description] AS [Description], 
+[DetailsOfArraivedMetal].[Scrap_MetalCode] AS [Scrap_MetalCode], 
+[DetailsOfArraivedMetal].[Cost] AS [Cost]
+FROM [dbo].[DetailsOfArraivedMetal] AS [DetailsOfArraivedMetal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProviderReceiverInterconnection" EntityType="Self.ProviderReceiverInterconnection" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ProviderReceiverInterconnection].[FirmTitle] AS [FirmTitle], 
+[ProviderReceiverInterconnection].[Name] AS [Name], 
+[ProviderReceiverInterconnection].[Surname] AS [Surname]
+FROM [dbo].[ProviderReceiverInterconnection] AS [ProviderReceiverInterconnection]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VIPProviders" EntityType="Self.VIPProviders" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -248,7 +348,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ScrapMetalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ScrapMetal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Arraiving">
           <Key>
             <PropertyRef Name="Id" />
@@ -330,12 +430,52 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
           <NavigationProperty Name="Consumptions" Relationship="Self.FK__Consumpti__Store__5535A963" FromRole="Store" ToRole="Consumption" />
           <NavigationProperty Name="Scraps" Relationship="Self.FK__Scrap__Store_Id__2D27B809" FromRole="Store" ToRole="Scrap" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RememberMe" Type="Boolean" />
+        </EntityType>
         <EntityType Name="ColumnsCount">
           <Key>
             <PropertyRef Name="table_name" />
           </Key>
           <Property Name="Count" Type="Int32" />
           <Property Name="table_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailsOfArraivedMetal">
+          <Key>
+            <PropertyRef Name="Density" />
+            <PropertyRef Name="Scrap_MetalCode" />
+            <PropertyRef Name="Cost" />
+          </Key>
+          <Property Name="Density" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Scrap_MetalCode" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProviderReceiverInterconnection">
+          <Key>
+            <PropertyRef Name="FirmTitle" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Surname" />
+          </Key>
+          <Property Name="FirmTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="VIPProvider">
           <Key>
@@ -434,14 +574,18 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ScrapMetal" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MyDb" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Arraivings" EntityType="Self.Arraiving" />
           <EntitySet Name="Consumptions" EntityType="Self.Consumption" />
           <EntitySet Name="Providers" EntityType="Self.Provider" />
           <EntitySet Name="Receivers" EntityType="Self.Receiver" />
           <EntitySet Name="Scraps" EntityType="Self.Scrap" />
           <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="ColumnsCounts" EntityType="Self.ColumnsCount" />
+          <EntitySet Name="DetailsOfArraivedMetals" EntityType="Self.DetailsOfArraivedMetal" />
+          <EntitySet Name="ProviderReceiverInterconnections" EntityType="Self.ProviderReceiverInterconnection" />
           <EntitySet Name="VIPProviders" EntityType="Self.VIPProvider" />
           <AssociationSet Name="FK__Arraiving__Provi__3B75D760" Association="Self.FK__Arraiving__Provi__3B75D760">
             <End Role="Provider" EntitySet="Providers" />
@@ -474,18 +618,91 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
           <FunctionImport Name="countAllArraiving" ReturnType="Collection(Double)" />
           <FunctionImport Name="countRows" ReturnType="Collection(Int32)" />
           <FunctionImport Name="coutRows" />
+          <FunctionImport Name="getArravingsIn2016" ReturnType="Collection(ScrapMetal.getArravingsIn2016_Result)" />
+          <FunctionImport Name="getBestProviders" ReturnType="Collection(ScrapMetal.getBestProviders_Result)" />
           <FunctionImport Name="getVIP" ReturnType="Collection(String)" />
+          <FunctionImport Name="h1" ReturnType="Collection(ScrapMetal.h1_Result)">
+            <Parameter Name="LastName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc1" ReturnType="Collection(Int32)">
+            <Parameter Name="par1" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ScrapMetal.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ScrapMetal.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="TableCounts" />
           <FunctionImport Name="TableFieldsCount" />
         </EntityContainer>
+        <ComplexType Name="getArravingsIn2016_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Provider_Id" Nullable="false" />
+          <Property Type="Int32" Name="Scrap_MetalCode" Nullable="false" />
+          <Property Type="DateTime" Name="ArravingDate" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="Cost" Nullable="false" />
+          <Property Type="Double" Name="Amount" Nullable="false" />
+          <Property Type="Int32" Name="Store_Id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getBestProviders_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PassportCode" Nullable="true" MaxLength="10" />
+          <Property Type="Double" Name="Cost" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="h1_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirmTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CompanyCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telephone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Account" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="ContactPerson" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ScrapMetalModelContainer" CdmEntityContainer="ScrapMetal">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ScrapMetalContainer" CdmEntityContainer="MyDb">
           <EntitySetMapping Name="Arraivings">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Arraiving">
+            <EntityTypeMapping TypeName="ScrapMetal.Arraiving">
               <MappingFragment StoreEntitySet="Arraiving">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Provider_Id" ColumnName="Provider_Id" />
@@ -498,7 +715,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Consumptions">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Consumption">
+            <EntityTypeMapping TypeName="ScrapMetal.Consumption">
               <MappingFragment StoreEntitySet="Consumption">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Receiver_Id" ColumnName="Receiver_Id" />
@@ -511,7 +728,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Providers">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Provider">
+            <EntityTypeMapping TypeName="ScrapMetal.Provider">
               <MappingFragment StoreEntitySet="Provider">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -523,7 +740,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Receivers">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Receiver">
+            <EntityTypeMapping TypeName="ScrapMetal.Receiver">
               <MappingFragment StoreEntitySet="Receiver">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
@@ -536,7 +753,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Scraps">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Scrap">
+            <EntityTypeMapping TypeName="ScrapMetal.Scrap">
               <MappingFragment StoreEntitySet="Scrap">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -549,7 +766,7 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stores">
-            <EntityTypeMapping TypeName="ScrapMetalModel.Store">
+            <EntityTypeMapping TypeName="ScrapMetal.Store">
               <MappingFragment StoreEntitySet="Store">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -557,16 +774,56 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ScrapMetal.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ScrapMetal.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RememberMe" ColumnName="RememberMe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ColumnsCounts">
-            <EntityTypeMapping TypeName="ScrapMetalModel.ColumnsCount">
+            <EntityTypeMapping TypeName="ScrapMetal.ColumnsCount">
               <MappingFragment StoreEntitySet="ColumnsCount">
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="table_name" ColumnName="table_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DetailsOfArraivedMetals">
+            <EntityTypeMapping TypeName="ScrapMetal.DetailsOfArraivedMetal">
+              <MappingFragment StoreEntitySet="DetailsOfArraivedMetal">
+                <ScalarProperty Name="Density" ColumnName="Density" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderReceiverInterconnections">
+            <EntityTypeMapping TypeName="ScrapMetal.ProviderReceiverInterconnection">
+              <MappingFragment StoreEntitySet="ProviderReceiverInterconnection">
+                <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VIPProviders">
-            <EntityTypeMapping TypeName="ScrapMetalModel.VIPProvider">
+            <EntityTypeMapping TypeName="ScrapMetal.VIPProvider">
               <MappingFragment StoreEntitySet="VIPProviders">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -577,12 +834,73 @@ FROM [dbo].[VIPProviders] AS [VIPProviders]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="countAllArraiving" FunctionName="Хранилище ScrapMetalModel.countAllArraiving" />
-          <FunctionImportMapping FunctionImportName="countRows" FunctionName="Хранилище ScrapMetalModel.countRows" />
-          <FunctionImportMapping FunctionImportName="coutRows" FunctionName="Хранилище ScrapMetalModel.coutRows" />
-          <FunctionImportMapping FunctionImportName="getVIP" FunctionName="Хранилище ScrapMetalModel.getVIP" />
-          <FunctionImportMapping FunctionImportName="TableCounts" FunctionName="Хранилище ScrapMetalModel.TableCounts" />
-          <FunctionImportMapping FunctionImportName="TableFieldsCount" FunctionName="Хранилище ScrapMetalModel.TableFieldsCount" />
+          <FunctionImportMapping FunctionImportName="countAllArraiving" FunctionName="Хранилище ScrapMetal.countAllArraiving" />
+          <FunctionImportMapping FunctionImportName="countRows" FunctionName="Хранилище ScrapMetal.countRows" />
+          <FunctionImportMapping FunctionImportName="coutRows" FunctionName="Хранилище ScrapMetal.coutRows" />
+          <FunctionImportMapping FunctionImportName="getArravingsIn2016" FunctionName="Хранилище ScrapMetal.getArravingsIn2016">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScrapMetal.getArravingsIn2016_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Provider_Id" ColumnName="Provider_Id" />
+                <ScalarProperty Name="Scrap_MetalCode" ColumnName="Scrap_MetalCode" />
+                <ScalarProperty Name="ArravingDate" ColumnName="ArravingDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Store_Id" ColumnName="Store_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBestProviders" FunctionName="Хранилище ScrapMetal.getBestProviders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScrapMetal.getBestProviders_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PassportCode" ColumnName="PassportCode" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getVIP" FunctionName="Хранилище ScrapMetal.getVIP" />
+          <FunctionImportMapping FunctionImportName="h1" FunctionName="Хранилище ScrapMetal.h1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScrapMetal.h1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirmTitle" ColumnName="FirmTitle" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc1" FunctionName="Хранилище ScrapMetal.proc1" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище ScrapMetal.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище ScrapMetal.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище ScrapMetal.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище ScrapMetal.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScrapMetal.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище ScrapMetal.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScrapMetal.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище ScrapMetal.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище ScrapMetal.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="TableCounts" FunctionName="Хранилище ScrapMetal.TableCounts" />
+          <FunctionImportMapping FunctionImportName="TableFieldsCount" FunctionName="Хранилище ScrapMetal.TableFieldsCount" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

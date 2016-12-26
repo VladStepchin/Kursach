@@ -12,7 +12,19 @@
     <title>LisOfMetalToPDF</title>
 </head>
 <body>
-    <table>
+    <div class="right-sign" style="text-align:right;width:100%">
+        <p>ЗАТВЕРДЖУЮ</p>
+
+        <p>Начальник Металобази</p>
+
+        <p>Р.Г.Зінченко</p>
+
+        <p>31.12.2016</p>
+    </div>
+    <h1 style="text-align:center;">Звіт</h1>
+    <h1 style="text-align:center;">Метали,що знаходяться на підприємстві</h1>
+    <table style="margin: 0 auto;
+           font-size:30px;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
@@ -34,30 +46,31 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Density)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store_Id)
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Density)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store_Id)
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>

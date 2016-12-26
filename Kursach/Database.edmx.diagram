@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="463895812421436e99075f6e095103cf" Name="Diagram1">
+        <EntityTypeShape EntityType="ScrapMetal.Arraiving" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.Consumption" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.Provider" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.Receiver" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.Scrap" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.Store" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.ColumnsCount" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.DetailsOfArraivedMetal" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.ProviderReceiverInterconnection" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrapMetal.VIPProvider" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ScrapMetal.FK__Arraiving__Provi__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Arraiving__Scrap__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Arraiving__Store__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Consumpti__Recei__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Consumpti__Scrap__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Consumpti__Store__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrapMetal.FK__Scrap__Store_Id__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
