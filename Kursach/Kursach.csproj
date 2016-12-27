@@ -210,11 +210,13 @@
     <Compile Include="User.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ScrapViewModel.cs" />
     <Compile Include="VIPProvider.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Account.css" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
     <Content Include="Content\materialize\font\material-design-icons\LICENSE.txt" />
@@ -382,6 +384,9 @@
     <Content Include="Views\Scrap\LisOfMetalToPDF.cshtml" />
     <Content Include="Views\Provider\VIPProdivers.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Arraiving\GetDetailsOfArraivedMetal.cshtml" />
+    <Content Include="Views\Receiver\ProviderReceiverInterconnection.cshtml" />
+    <Content Include="Views\Provider\ListOfProvidersToPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

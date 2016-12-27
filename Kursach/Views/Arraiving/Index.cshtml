@@ -5,12 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center;">Надходження</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+<table class="striped bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Provider_Id)
@@ -55,14 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Store_Id)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                <a class="custom">Delete</a>
-                <div id="modal_form_delete">
-                    <!-- Сaмo oкнo -->
-                    <span id="modal_close_delete">X</span> <!-- Кнoпкa зaкрыть -->
-                    @Html.Partial("Delete", item);
-                </div>
-                <div id="overlay_delete"></div><!-- Пoдлoжкa -->
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id })          
             </td>
         </tr>
     }
@@ -77,3 +67,7 @@
     @Html.Partial("Create", new Kursach.Arraiving());
 </div>
 <div id="overlay"></div><!-- Пoдлoжкa --> 
+
+<div class="additional-action">
+    <a href=@Url.RouteUrl("ArraivingDetails") class="waves-effect waves-light btn-large">Деталі металів</a>
+</div>

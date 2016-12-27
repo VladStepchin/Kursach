@@ -4,12 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center;">Номер складу</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+<table class="striped bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -31,13 +28,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                <a class="custom">Delete</a>
-                <div id="modal_form_delete">
-                    <!-- Сaмo oкнo -->
-                    <span id="modal_close_delete">X</span> <!-- Кнoпкa зaкрыть -->
-                    @Html.Partial("Delete", item);
-                </div>
-                <div id="overlay_delete"></div><!-- Пoдлoжкa -->
             </td>
         </tr>
     }

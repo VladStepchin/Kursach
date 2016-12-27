@@ -1,12 +1,14 @@
-﻿@model IEnumerable<Kursach.Scrap>
+﻿@model IEnumerable<Kursach.VIPProvider>
 
-
+@{
+    Layout=null;
+}
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>LisOfMetalToPDF</title>
+    <title>LisOfProvidersToPDF.cshtml</title>
 </head>
 <body>
     <div class="right-sign" style="text-align:right;width:100%">
@@ -19,26 +21,27 @@
         <p>31.12.2016</p>
     </div>
     <h1 style="text-align:center;">Звіт</h1>
-    <h1 style="text-align:center;">Метали,що знаходяться на підприємстві</h1>
-    <table>
+    <h1 style="text-align:center;">Список найкращих провайдерів</h1>
+    <table style="margin: 0 auto;
+           font-size:30px;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetalCode)
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassportCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telephone)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Density)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Store_Id)
             </th>
             <th></th>
         </tr>
@@ -47,26 +50,25 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MetalCode)
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassportCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Density)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Store_Id)
-                </td>
             </tr>
         }
-
     </table>
 </body>
 </html>

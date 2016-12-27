@@ -2,39 +2,33 @@
 @{
     ViewBag.Title = "Вход в систему";
 }
-<h2>Вход в систему</h2>
+@Styles.Render("~/Content/Account.css")
+<div id="content">
+    <h2 style="text-align:center;">Вхід в систему</h2>
+    <div id="form">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Login)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
 
-        <legend>Введите логин и пароль</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Login)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login)
-            @Html.ValidationMessageFor(model => model.Login)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RememberMe)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.RememberMe)
-            @Html.ValidationMessageFor(model => model.RememberMe)
-        </div>
-
-        <p>
-            <input type="submit" value="Войти" />
-        </p>
-}
+            <p>
+                <input type="submit" class="waves-effect waves-light btn-large add-metal" value="Войти" />
+            </p>
+        }
+    </div>
+</div>

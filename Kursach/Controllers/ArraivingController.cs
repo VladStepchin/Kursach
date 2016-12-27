@@ -27,6 +27,14 @@ namespace Kursach.Controllers
             return View(Arraivings);
         }
 
+        [HttpGet]
+        public ActionResult GetDetailsOfArraivedMetal()
+        {
+            List<DetailsOfArraivedMetal> DetailsOfArraivedMetal = db.DetailsOfArraivedMetals.ToList();
+
+            return View(DetailsOfArraivedMetal);
+        }
+
         [HttpPost]
         public ActionResult Create(Arraiving arraiving)
         {
@@ -87,6 +95,18 @@ namespace Kursach.Controllers
 
        [HttpPost]
        public ActionResult Edit(Arraiving arraiving)
+       {
+           if (!ModelState.IsValid)
+           {
+               return View("Error");
+           }
+
+           db.Entry(arraiving).State = EntityState.Modified;
+           db.SaveChanges();
+           return RedirectToAction("Index");
+       }
+
+       public ActionResult CountAllArraiving()
        {
            if (!ModelState.IsValid)
            {

@@ -16,7 +16,7 @@ namespace Kursach.Controllers
         MyDb db = new MyDb();
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Users="admin")]
         public ActionResult Index()
         {
             return View();

@@ -54,6 +54,35 @@ namespace Kursach
                url: "Scrap/ConvertHtmlPageToPdf",
                defaults: new { controller = "Scrap", action = "ConvertHtmlPageToPdf", id = UrlParameter.Optional }
            );
+
+              routes.MapRoute(
+               name: "ConvertHtmlPageToPdfProvider",
+               url: "Provider/ConvertHtmlPageToPdfProvider",
+               defaults: new { controller = "Provider", action = " ConvertHtmlPageToPdfProvider", id = UrlParameter.Optional }
+           );
+          
+            routes.MapRoute(
+               name: "LogIn",
+               url: "Account/Login",
+               defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
+               name: "LogOut",
+               url: "Account/LogOff",
+               defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
+           );
+            routes.MapRoute(
+               name: "ArraivingDetails",
+               url: "Arraiving/GetDetailsOfArraivedMetal",
+               defaults: new { controller = "Arraiving", action = "GetDetailsOfArraivedMetal", id = UrlParameter.Optional }
+           );
+
+            routes.MapRoute(
+               name: "ProviderReceiverInterconnection",
+               url: "Receiver/ProviderReceiverInterconnection",
+               defaults: new { controller = "Receiver", action = "ProviderReceiverInterconnection", id = UrlParameter.Optional }
+           );
         }
     }
 }

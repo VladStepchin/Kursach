@@ -27,6 +27,13 @@ namespace Kursach.Controllers
             return View(Receivers);
         }
 
+        public ActionResult ProviderReceiverInterconnection()
+        {
+            List<ProviderReceiverInterconnection> ProviderReceiverInterconnection = db.ProviderReceiverInterconnections.ToList();
+
+            return View(ProviderReceiverInterconnection);
+        }
+
        [HttpPost]
         public ActionResult Create(Receiver receiver)
         {

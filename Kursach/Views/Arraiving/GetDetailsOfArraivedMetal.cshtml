@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Kursach.DetailsOfArraivedMetal>
+
+@{
+    ViewBag.Title = "GetDetailsOfArraivedMetal";
+}
+
+<h2 style="text-align:center;">Деталі про метал, що прибув</h2>
+
+<table class="striped bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Density)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scrap_MetalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Density)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Scrap_MetalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+        </tr>
+    }
+
+</table>

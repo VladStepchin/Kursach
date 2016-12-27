@@ -73,7 +73,7 @@ namespace Kursach.Controllers
              FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
              fileResult.FileDownloadName = "ThisMvcViewToPdf.pdf";
 
-             return File(pdfBuffer, "application/pdf", "ThisMvcViewToPdf.pdf");
+             return File(pdfBuffer, "application/pdf", "ScrapList.pdf");
          } 
 
         [HttpGet]

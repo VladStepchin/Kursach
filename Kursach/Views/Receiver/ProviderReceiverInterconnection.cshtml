@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Kursach.ProviderReceiverInterconnection>
+
+@{
+    ViewBag.Title = "ProviderReceiverInterconnection";
+}
+
+<h2 style="text-align:center;">Взаємозв'язок продавців і покупців металів</h2>
+
+<table class="striped bordered" style="overflow:scroll;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirmTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirmTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+        </tr>
+    }
+
+</table>

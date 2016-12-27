@@ -1,15 +1,9 @@
 ﻿@model IEnumerable<Kursach.VIPProvider>
 
-@{
-    ViewBag.Title = "VIPProdivers";
-}
 
-<h2>VIPProdivers</h2>
+<h2>VIP провайдери</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+<table class="striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -52,12 +46,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
     </tr>
 }
-
 </table>
+
+<div class="additional-action">
+    <a href=@Url.RouteUrl("ConvertHtmlPageToPdfProvider") class="waves-effect waves-light btn-large">Оформити звіт</a>
+</div>
